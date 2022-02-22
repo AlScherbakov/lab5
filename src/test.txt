@@ -1,0 +1,4 @@
+show
+info
+execute_script /Users/alexandr/Desktop/ITMO/prog/lab5/src/script.txt
+help
