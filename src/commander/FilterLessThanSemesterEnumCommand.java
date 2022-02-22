@@ -6,6 +6,10 @@ import util.StudyGroup;
 import java.util.Comparator;
 import java.util.TreeSet;
 
+/**
+ * Filter less than semester enum command returns a collection of StudyGroups, which semester is lower than given one
+ */
+
 public class FilterLessThanSemesterEnumCommand extends Command{
     Semester semester;
     TreeSet<StudyGroup> collection;

@@ -1,5 +1,9 @@
 package commander;
 
+/**
+ * Stops program execution with 0 code
+ */
+
 public class ExitCommand extends Command{
     public ExitCommand(){
         this.name = CommandEnum.EXIT;

@@ -5,6 +5,10 @@ import util.StudyGroup;
 import java.util.Comparator;
 import java.util.TreeSet;
 
+/**
+ * Max group by admin command returns the greatest collection elemets, comparing my groupAdmin field
+ */
+
 public class MaxGroupByAdminCommand extends Command{
     TreeSet<StudyGroup> collection;
     public MaxGroupByAdminCommand(TreeSet<StudyGroup> c){

@@ -1,5 +1,9 @@
 package commander;
 
+/**
+ * Enumeration of all commands required by lab task
+ */
+
 public enum CommandEnum {
     HELP,
     INFO,

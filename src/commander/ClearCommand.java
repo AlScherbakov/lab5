@@ -4,6 +4,10 @@ import util.StudyGroup;
 
 import java.util.TreeSet;
 
+/**
+ * Clear command returns empty TreeSet
+ */
+
 public class ClearCommand extends Command{
 
     public ClearCommand(){

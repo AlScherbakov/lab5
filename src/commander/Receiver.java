@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import java.util.Deque;
 import java.util.TreeSet;
 
+/**
+ * Receiver class - Command pattern element - stores program state
+ */
+
 public class Receiver {
     private TreeSet<StudyGroup> collection;
     private String outputFilepath;

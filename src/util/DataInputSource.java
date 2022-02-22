@@ -4,6 +4,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Input source manager: standard input or file BufferedReader
+ */
+
 public class DataInputSource {
     private Scanner scan;
     private BufferedReader reader;

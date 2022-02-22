@@ -3,7 +3,9 @@ package util;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-
+/**
+ * Data collector class. Used for managing user input
+ */
 public class DataCollector {
     public DataInputModeEnum mode;
     public DataInputSource source;

@@ -1,5 +1,9 @@
 package util;
 
+/**
+ * Coordinates class. X max value is 927. Y max value is 772
+ */
+
 public class Coordinates {
     private long x; //Максимальное значение поля: 927
     private double y; //Максимальное значение поля: 772

@@ -5,6 +5,10 @@ import util.StudyGroup;
 import java.util.Objects;
 import java.util.TreeSet;
 
+/**
+ * Remove by id command returns collection without an element with given id
+ */
+
 public class RemoveByIdCommand extends Command {
     int id;
     TreeSet<StudyGroup> collection;

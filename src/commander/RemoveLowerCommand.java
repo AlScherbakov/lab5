@@ -7,6 +7,10 @@ import util.StudyGroup;
 import java.util.Set;
 import java.util.TreeSet;
 
+/**
+ * Remove lower command filters collection and leaves only elements which are greater than given one
+ */
+
 public class RemoveLowerCommand extends Command{
     TreeSet<StudyGroup> collection;
     DataInputSource source;

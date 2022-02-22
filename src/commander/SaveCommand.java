@@ -11,6 +11,10 @@ import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.TreeSet;
 
+/**
+ * Save command writes data into output file
+ */
+
 public class SaveCommand extends Command{
     String outputFilepath;
     TreeSet<StudyGroup> collection;

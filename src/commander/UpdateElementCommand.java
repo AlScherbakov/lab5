@@ -8,6 +8,10 @@ import util.StudyGroup;
 import java.util.Objects;
 import java.util.TreeSet;
 
+/**
+ * Update element command returns new collection with updated element by given id
+ */
+
 public class UpdateElementCommand extends Command{
     int id;
     TreeSet<StudyGroup> collection;

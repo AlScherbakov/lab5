@@ -2,6 +2,10 @@ package commander;
 
 import java.util.ArrayList;
 
+/**
+ * History command returns last 6 entries of called commands list
+ */
+
 public class HistoryCommand extends Command{
     private final ArrayList<CommandEnum> history;
     public HistoryCommand(ArrayList<CommandEnum> h){

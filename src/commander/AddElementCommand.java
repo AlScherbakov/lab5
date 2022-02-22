@@ -4,6 +4,10 @@ import util.DataCollector;
 import util.DataInputSource;
 import util.StudyGroup;
 
+/**
+ * Add element command requests and returns new StudyGroup from DataCollector
+ */
+
 public class AddElementCommand extends Command{
     private final DataInputSource source;
     public AddElementCommand(DataInputSource s) {

@@ -1,5 +1,9 @@
 package commander;
 
+/**
+ * Help command returns an info about all commands in the project
+ */
+
 public class HelpCommand extends Command {
     public HelpCommand(){
         this.name = CommandEnum.HELP;

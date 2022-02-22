@@ -3,8 +3,11 @@ package commander;
 import util.StudyGroup;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.TreeSet;
+
+/**
+ * Print field descending group admin command returns a list of group admins in descending order comparing by age of an admin
+ */
 
 public class PrintFieldDescendingGroupAdminCommand extends Command{
     TreeSet<StudyGroup> collection;

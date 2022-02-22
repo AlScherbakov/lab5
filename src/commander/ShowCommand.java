@@ -4,7 +4,10 @@ import util.StudyGroup;
 
 import java.util.ArrayList;
 import java.util.TreeSet;
-import java.util.concurrent.atomic.AtomicReference;
+
+/**
+ * Show command returns an info string about each element in collection
+ */
 
 public class ShowCommand extends Command{
     TreeSet<StudyGroup> collection;

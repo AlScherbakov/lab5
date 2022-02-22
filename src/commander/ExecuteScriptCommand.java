@@ -4,6 +4,10 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
+/**
+ * Execute script command returns new BufferedReader from filepath
+ */
+
 public class ExecuteScriptCommand extends Command{
     String scriptPath;
     public ExecuteScriptCommand(String p){

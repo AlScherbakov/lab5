@@ -8,13 +8,20 @@ import util.StudyGroup;
 import java.io.*;
 import java.util.*;
 
-//
+/**
+ * Client class from Command pattern. Main process host. May be used for creation of several application instances
+ */
 public class Client {
     private final Scanner scan;
     public Client(Scanner s){
         scan = s;
     };
     boolean active = true;
+
+    /**
+     * run method
+     * @throws IOException
+     */
     public void run() throws IOException {
         String outputFilepath = System.getenv("lab5_data_filepath");
         TreeSet<StudyGroup> groups = new TreeSet<>();
@@ -55,6 +62,10 @@ public class Client {
             programState = invoker.executeCommand(command);
         }
     }
+
+    /**
+     * stop method
+     */
     public void stop(){
         active = false;
     }

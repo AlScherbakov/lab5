@@ -2,8 +2,11 @@ package commander;
 
 import util.StudyGroup;
 
-import java.util.Date;
 import java.util.TreeSet;
+
+/**
+ * Info command returns an information about current collection state: type, initialization date, number of elements
+ */
 
 public class InfoCommand extends Command{
     TreeSet<StudyGroup> collection;
