@@ -18,7 +18,7 @@ public class DataInputSource {
         this.reader = reader;
     }
     public String get() throws IOException {
-        return scan != null ? scan.nextLine() : reader.readLine();
+        return scan != null ? scan.nextLine().trim() : reader.readLine().trim();
     }
     public boolean hasNext() throws IOException {
         return scan != null ? scan.hasNext() : reader.readLine() != null;

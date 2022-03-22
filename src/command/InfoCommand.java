@@ -1,4 +1,4 @@
-package commander;
+package command;
 
 import util.StudyGroup;
 

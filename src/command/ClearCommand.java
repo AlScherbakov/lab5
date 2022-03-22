@@ -1,4 +1,4 @@
-package commander;
+package command;
 
 import util.StudyGroup;
 
@@ -16,7 +16,6 @@ public class ClearCommand extends Command{
 
     @Override
     public TreeSet<StudyGroup> execute (){
-        System.out.println("Коллекция очищена");
         return new TreeSet<>();
     }
 

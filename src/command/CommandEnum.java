@@ -1,4 +1,4 @@
-package commander;
+package command;
 
 /**
  * Enumeration of all commands required by lab task

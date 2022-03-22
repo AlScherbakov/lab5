@@ -1,4 +1,4 @@
-package commander;
+package command;
 
 /**
  * Abstract Command class - superclass for all commands - a part of Command pattern

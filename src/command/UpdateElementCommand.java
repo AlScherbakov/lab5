@@ -1,7 +1,6 @@
-package commander;
+package command;
 
 import util.DataCollector;
-import util.DataInputModeEnum;
 import util.DataInputSource;
 import util.StudyGroup;
 

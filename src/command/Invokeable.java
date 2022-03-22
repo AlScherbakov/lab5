@@ -1,4 +1,6 @@
-package commander;
+package command;
+
+import java.io.IOException;
 
 /**
  * Functional interface. Used for all entities which may be executed (Commands)
@@ -7,5 +9,5 @@ package commander;
 
 @FunctionalInterface
 public interface Invokeable<T> {
-    T execute();
+    T execute() throws IOException;
 }

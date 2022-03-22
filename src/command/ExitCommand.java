@@ -1,4 +1,4 @@
-package commander;
+package command;
 
 /**
  * Stops program execution with 0 code

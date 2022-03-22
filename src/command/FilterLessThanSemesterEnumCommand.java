@@ -1,4 +1,4 @@
-package commander;
+package command;
 
 import util.Semester;
 import util.StudyGroup;
@@ -32,6 +32,6 @@ public class FilterLessThanSemesterEnumCommand extends Command{
     }
     @Override
     public String describe() {
-        return "filter_less_than_semester_enum (SECOND, THIRD, SIXTH, SEVENTH)semesterEnum : вывести элементы, значение поля semesterEnum которых меньше заданного";
+        return "filter_less_than_semester_enum (SECOND, THIRD, SIXTH, SEVENTH) : вывести элементы, значение поля semesterEnum которых меньше заданного";
     }
 }

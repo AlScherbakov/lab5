@@ -1,4 +1,4 @@
-package commander;
+package command;
 
 import util.DataCollector;
 import util.DataInputSource;
@@ -23,7 +23,7 @@ public class RemoveLowerCommand extends Command{
 
     @Override
     public TreeSet<StudyGroup> execute(){
-        System.out.println("С какой группой сравнить?");
+        System.out.println("Введите новый элемент для сравнения:");
         StudyGroup aGroup = new DataCollector(source).requestStudyGroup();
         Set<StudyGroup> groupsToRemove = collection.headSet(aGroup);
         collection.removeAll(groupsToRemove);

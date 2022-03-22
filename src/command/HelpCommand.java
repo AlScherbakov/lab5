@@ -1,4 +1,4 @@
-package commander;
+package command;
 
 /**
  * Help command returns an info about all commands in the project
