@@ -1,6 +1,6 @@
 add
 P3115
-333 33.33
+33 33
 33
 3
 DISTANCE_EDUCATION
@@ -10,4 +10,3 @@ Stepan
 RED
 RUSSIA
 4.44 4.44 444 locationName
-show
