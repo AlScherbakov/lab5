@@ -3,6 +3,7 @@ package command;
 import util.StudyGroup;
 
 import java.util.Comparator;
+import java.util.Set;
 import java.util.TreeSet;
 
 /**
@@ -10,8 +11,8 @@ import java.util.TreeSet;
  */
 
 public class MaxGroupByAdminCommand extends Command{
-    TreeSet<StudyGroup> collection;
-    public MaxGroupByAdminCommand(TreeSet<StudyGroup> c){
+    Set<StudyGroup> collection;
+    public MaxGroupByAdminCommand(Set<StudyGroup> c){
         collection = c;
         this.name = CommandEnum.MAX_BY_GROUP_ADMIN;
     }

@@ -6,6 +6,7 @@ import util.StudyGroup;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.util.Set;
 import java.util.TreeSet;
 
 /**
@@ -14,8 +15,8 @@ import java.util.TreeSet;
 
 public class SaveCommand extends Command{
     String outputFilepath;
-    TreeSet<StudyGroup> collection;
-    public SaveCommand(String path, TreeSet<StudyGroup> c){
+    Set<StudyGroup> collection;
+    public SaveCommand(String path, Set<StudyGroup> c){
         outputFilepath = path;
         collection = c;
         this.name = CommandEnum.SAVE;

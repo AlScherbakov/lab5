@@ -4,6 +4,7 @@ import util.Semester;
 import util.StudyGroup;
 
 import java.util.Comparator;
+import java.util.Set;
 import java.util.TreeSet;
 
 /**
@@ -12,15 +13,15 @@ import java.util.TreeSet;
 
 public class FilterLessThanSemesterEnumCommand extends Command{
     Semester semester;
-    TreeSet<StudyGroup> collection;
-    public FilterLessThanSemesterEnumCommand(Semester s, TreeSet<StudyGroup> c){
+    Set<StudyGroup> collection;
+    public FilterLessThanSemesterEnumCommand(Semester s, Set<StudyGroup> c){
         semester = s;
         collection = c;
         this.name = CommandEnum.FILTER_LESS_THAN_SEMESTER_ENUM;
     }
     @Override
-    public TreeSet<StudyGroup> execute(){
-        TreeSet<StudyGroup> g = new TreeSet<>(Comparator.comparing(StudyGroup::getSemesterEnum));
+    public Set<StudyGroup> execute(){
+        Set<StudyGroup> g = new TreeSet<>(Comparator.comparing(StudyGroup::getSemesterEnum));
         g.addAll(collection);
         g.removeIf((StudyGroup x) -> semester.compareTo(x.getSemesterEnum()) <= 0);
         if (g.size() > 0){

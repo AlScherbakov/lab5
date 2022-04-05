@@ -12,87 +12,17 @@ import java.util.Objects;
 public class DataCollector {
     public DataInputModeEnum mode;
     public DataInputSource source;
-//    private final Class<T> genericType;
-    
+
     public DataCollector(DataInputModeEnum mode, DataInputSource source){
         this.mode = mode;
         this.source = source;
-//        this.genericType = genericType;
     }
 
     public DataCollector(DataInputSource i) {
         source = i;
-//        this.genericType = genericType;
     }
 
-//    public T collect(String query, String p) {
-//        try {
-//            System.out.println(genericType.getName());
-//            System.out.print(query);
-//            String rawData = source.get();
-//            Pattern pattern = Pattern.compile(p);
-//            Matcher matcher = pattern.matcher(rawData);
-//            if (matcher.find()) {
-//                System.out.println(matcher.group(0));
-//                switch (genericType.getName()){
-//                    case "int":
-//                    case "long":
-//                    case "Integer":
-//                    case "Long":
-//                    case "java.time.LocalDate":
-//                    case "java.lang.String": {
-//                        return (T) matcher.group(0);
-//                    }
-//                    case "util.Color":
-//                    case "util.Country":
-//                    case "util.Semester": {
-////                        assert genericType.isInstance(Enum.class);
-//                        Method vo =  genericType.getDeclaredMethod("valueOf");
-//                        return (T) vo.invoke(matcher.group(0));
-//                    }
-//                    case "util.Location": {
-//                        Constructor<T> constructor = genericType.getConstructor(Double.class, Float.class, Integer.class, String.class);
-//                        String[] params = matcher.group(0).split("\\s");
-//                        return constructor.newInstance(Double.parseDouble(params[0]), Float.parseFloat(params[1]), Integer.parseInt(params[2]), params[3]);
-//                    }
-//                    case "util.Coordinates": {
-//                        Constructor<T> constructor = genericType.getConstructor(Long.class, Double.class);
-//                        String[] params = matcher.group(0).split("\\s");
-//                        return constructor.newInstance(Long.parseLong(params[0]), Double.parseDouble(params[1]));
-//                    } default: {
-//                        return null;
-//                    }
-//                }
-////                return (T) new parent(matcher.group(0));
-//            } else {
-//                return null;
-//            }
-////            List<String> data = List.of(matcher.group(1));
-////            parent.getConstructor();
-////        data.forEach(System.out::println);
-////        return new parent(data);
-//        } catch (Exception e){
-//            return null;
-//        }
-//    };
-//    private static final String personNameRegex = "([A-Z][a-z][А-ЯЁ][а-яё])+";
-//    private static final String birthdayRegex = "\\d{2}.\\d{2}.\\d{4}";
-//    private static final String colorRegex = "w+";
-//    private static final String countryRegex = "w+";
-//    private static final String locationRegex = ".+\\s.+\\s.+\\s.+";
-//
-//    private static final String groupNameRegex = "[A-Z]\\d{4,6}";
-//    private static final String coordinatesRegex = ".+\\s.+";
-//    private static final String studentsCountRegex = "\\d{1,}";
-//    private static final String educationFormRegex = "w+";
-//    private static final String semesterRegex = "w+";
-
     public Person requestPerson(){
-//            String name = new DataCollector<String>(inputSource, String.class).collect( "Введите имя: ", personNameRegex);
-//            LocalDate birthday = new DataCollector<LocalDate>(inputSource, LocalDate.class).collect( "Введите день рождения в формате дд.мм.гггг :", birthdayRegex);
-//            Color eyeColor = new DataCollector<Color>(inputSource, Color.class).collect(String.format("Введите цвет глаз из доступных: (%s) ", Arrays.toString(Color.values())), colorRegex);
-//            Country nationality = new DataCollector<Country>(inputSource, Country.class).collect(String.format("Введите национальность из доступных: (%s) ", Arrays.toString(Country.values())), countryRegex);
-//            Location location = new DataCollector<Location>(inputSource, Location.class).collect("Введите локацию в формате (Double)x (Float)y (Integer)z (String)Название_локации: ", locationRegex);
         try{
             String name = collectName();
             LocalDate birthday = collectBirthday();
@@ -109,14 +39,6 @@ public class DataCollector {
     };
 
     public StudyGroup requestStudyGroup(){
-//            String name = new DataCollector<String>(inputSource, String.class).collect( "Введите имя группы в формате [A-Z]d{4,6}: ", groupNameRegex);
-//            Coordinates coordinates = new DataCollector<Coordinates>(inputSource, Coordinates.class).collect( "Введите координаты в формате (Long)x (Double)y: ", coordinatesRegex);
-//            int studentsCount = new DataCollector<Integer>(inputSource, int.class).collect("Введите количество студентов: ", studentsCountRegex);
-//            long transferredStudents = new DataCollector<Long>(inputSource, long.class).collect("Введите Введите количество студентов по обмену: ", studentsCountRegex);
-//            FormOfEducation formOfEducation = new DataCollector<FormOfEducation>(inputSource, FormOfEducation.class).collect(String.format("Введите форму обучения из доступных: (%s) ", Arrays.toString(FormOfEducation.values())), educationFormRegex);
-//            Semester semesterEnum = new DataCollector<Semester>(inputSource, Semester.class).collect(String.format("Введите семестр из доступных: (%s) ", Arrays.toString(Semester.values())), semesterRegex);
-//            System.out.println("Админ группы:");
-//            Person groupAdmin = requestPerson(source);
         try{
             String name = collectName();
             Coordinates coordinates = collectCoordinates();

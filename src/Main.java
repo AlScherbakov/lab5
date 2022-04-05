@@ -5,6 +5,7 @@ import java.util.*;
 /**
  * @author Alexandr Scherbakov P3114 (335101)
  * project entry point
+ * @theBestOfTheBestCode
  */
 public class Main {
     static final Scanner scan = new Scanner(System.in);

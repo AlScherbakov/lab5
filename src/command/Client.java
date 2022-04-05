@@ -7,11 +7,7 @@ import util.StudyGroup;
 
 import java.io.*;
 import java.nio.file.AccessDeniedException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
-import java.util.stream.Stream;
 
 /**
  * Client class from Command pattern. Main process host. May be used for creation of several application instances
@@ -23,13 +19,15 @@ public class Client {
     };
     boolean active = true;
 
+// buffered reader, custom tag
+
     /**
      * run method
      * @throws IOException
      */
-    public void run() throws IOException, IllegalArgumentException{
+    public void run() throws IOException {
         String outputFilepath = System.getenv("lab5_data_filepath");
-        TreeSet<StudyGroup> groups = new TreeSet<>();
+        Set<StudyGroup> groups = new TreeSet<>();
         Gson gson = new GsonBuilder().setDateFormat("dd.MM.yyyy HH:mm:ss").create();
         String collectionInitializationDate = "";
         try {
@@ -44,12 +42,10 @@ public class Client {
                 } else {
                     FileReader dataFileReader = new FileReader(outputFilepath);
                     StudyGroup[] data = gson.fromJson(dataFileReader, StudyGroup[].class);
-                    Stream<StudyGroup> clearDataStream = Arrays.stream(data).filter(StudyGroup::isValid);
-                    StudyGroup[] clearData = clearDataStream.toArray(StudyGroup[]::new);
+                    StudyGroup[] clearData = Arrays.stream(data).filter(StudyGroup::isValid).toArray(StudyGroup[]::new);
                     if(data.length != clearData.length){
                         System.err.println("Некоторые данные некорректны");
                     }
-
                     Collections.addAll(groups, clearData);
                     collectionInitializationDate = new Date(new File(outputFilepath).lastModified()).toString();
                 }
@@ -60,7 +56,7 @@ public class Client {
             System.err.println(e.getMessage());
             System.exit(1);
         }
-        ArrayList<CommandEnum> history = new ArrayList<>();
+        List<CommandEnum> history = new ArrayList<>();
         System.out.println("Введите команду (help - помощь)");
         DataInputSource inputSource = new DataInputSource(scan);
         Receiver programState = new Receiver(groups, outputFilepath, history, true, inputSource, collectionInitializationDate);

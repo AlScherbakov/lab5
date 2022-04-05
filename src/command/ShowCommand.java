@@ -3,15 +3,16 @@ package command;
 import util.StudyGroup;
 
 import java.util.ArrayList;
-import java.util.TreeSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Show command returns an info string about each element in collection
  */
 
 public class ShowCommand extends Command{
-    TreeSet<StudyGroup> collection;
-    public ShowCommand(TreeSet<StudyGroup> c){
+    Set<StudyGroup> collection;
+    public ShowCommand(Set<StudyGroup> c){
         collection = c;
         this.name = CommandEnum.SHOW;
     };
@@ -20,7 +21,7 @@ public class ShowCommand extends Command{
         if (collection.size() < 1){
             return "Коллекция пуста";
         } else {
-            ArrayList<String> groups = new ArrayList<>();
+            List<String> groups = new ArrayList<>();
             collection.forEach((StudyGroup g) -> groups.add(g.toString()));
             return String.join("\n", groups);
         }

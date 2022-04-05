@@ -2,6 +2,7 @@ package command;
 
 import util.StudyGroup;
 
+import java.util.Set;
 import java.util.TreeSet;
 
 /**
@@ -9,9 +10,9 @@ import java.util.TreeSet;
  */
 
 public class InfoCommand extends Command{
-    TreeSet<StudyGroup> collection;
+    Set<StudyGroup> collection;
     String creationDate;
-    public InfoCommand(TreeSet<StudyGroup> t, String d){
+    public InfoCommand(Set<StudyGroup> t, String d){
         collection = t;
         creationDate = d;
         this.name = CommandEnum.INFO;

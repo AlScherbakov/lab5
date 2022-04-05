@@ -4,24 +4,21 @@ import util.DataInputSource;
 import util.StudyGroup;
 
 import java.io.BufferedReader;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * Receiver class - Command pattern element - stores program state
  */
 
 public class Receiver {
-    private TreeSet<StudyGroup> collection;
+    private Set<StudyGroup> collection;
     private String outputFilepath;
-    private ArrayList<CommandEnum> history;
+    private List<CommandEnum> history;
     private boolean working;
     private DataInputSource source;
     public String collectionInitializationDate;
     private final Deque<BufferedReader> readers = new ArrayDeque<>();
-    public Receiver(TreeSet<StudyGroup> c, String o, ArrayList<CommandEnum> h, boolean w, DataInputSource s, String cid){
+    public Receiver(Set<StudyGroup> c, String o, List<CommandEnum> h, boolean w, DataInputSource s, String cid){
         collection = c;
         outputFilepath = o;
         history = h;
@@ -29,13 +26,13 @@ public class Receiver {
         source = s;
         collectionInitializationDate = cid;
     }
-    public TreeSet<StudyGroup> getCollection(){
+    public Set<StudyGroup> getCollection(){
         return collection;
     }
     public String getOutputFilepath(){
         return outputFilepath;
     }
-    public ArrayList<CommandEnum> getHistory(){
+    public List<CommandEnum> getHistory(){
         return history;
     }
     public boolean getWorking(){
@@ -53,7 +50,7 @@ public class Receiver {
     public Deque<BufferedReader> getReaders(){
         return readers;
     }
-    public void setCollection(TreeSet<StudyGroup> c){
+    public void setCollection(Set<StudyGroup> c){
         collection = c;
     }
     public void setOutputFilepath(String o){

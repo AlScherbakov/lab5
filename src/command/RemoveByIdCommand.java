@@ -3,7 +3,7 @@ package command;
 import util.StudyGroup;
 
 import java.util.Objects;
-import java.util.TreeSet;
+import java.util.Set;
 
 /**
  * Remove by id command returns collection without an element with given id
@@ -11,14 +11,14 @@ import java.util.TreeSet;
 
 public class RemoveByIdCommand extends Command {
     int id;
-    TreeSet<StudyGroup> collection;
-    public RemoveByIdCommand(int i, TreeSet<StudyGroup> c){
+    Set<StudyGroup> collection;
+    public RemoveByIdCommand(int i, Set<StudyGroup> c){
         id = i;
         collection = c;
         this.name = CommandEnum.REMOVE_BY_ID;
     }
     @Override
-    public TreeSet<StudyGroup> execute(){
+    public Set<StudyGroup> execute(){
         collection.removeIf(g -> Objects.equals(g.getId(), id));
         return collection;
     }

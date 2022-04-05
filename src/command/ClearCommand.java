@@ -2,6 +2,7 @@ package command;
 
 import util.StudyGroup;
 
+import java.util.Set;
 import java.util.TreeSet;
 
 /**
@@ -15,7 +16,7 @@ public class ClearCommand extends Command{
     }
 
     @Override
-    public TreeSet<StudyGroup> execute (){
+    public Set<StudyGroup> execute (){
         return new TreeSet<>();
     }
 

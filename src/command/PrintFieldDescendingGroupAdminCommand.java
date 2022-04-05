@@ -3,6 +3,7 @@ package command;
 import util.StudyGroup;
 
 import java.util.ArrayList;
+import java.util.Set;
 import java.util.TreeSet;
 
 /**
@@ -10,9 +11,9 @@ import java.util.TreeSet;
  */
 
 public class PrintFieldDescendingGroupAdminCommand extends Command{
-    TreeSet<StudyGroup> collection;
+    Set<StudyGroup> collection;
 
-    public PrintFieldDescendingGroupAdminCommand(TreeSet<StudyGroup> c){
+    public PrintFieldDescendingGroupAdminCommand(Set<StudyGroup> c){
         collection = c;
         this.name = CommandEnum.PRINT_FIELD_DESCENDING_GROUP_ADMIN;
     }

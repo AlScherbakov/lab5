@@ -22,7 +22,7 @@ public class RemoveLowerCommand extends Command{
     }
 
     @Override
-    public TreeSet<StudyGroup> execute(){
+    public Set<StudyGroup> execute(){
         System.out.println("Введите новый элемент для сравнения:");
         StudyGroup aGroup = new DataCollector(source).requestStudyGroup();
         Set<StudyGroup> groupsToRemove = collection.headSet(aGroup);
