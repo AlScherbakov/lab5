@@ -3,6 +3,7 @@ package util;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Objects;
 
 /**
@@ -136,18 +137,15 @@ public class DataCollector {
 
     private String collectName() throws RunOffCommandException, IOException {
         try {
-            System.out.print("Введите имя (Alex):\t");
-            if(source.hasNext()) {
-    //            if (mode == DataInputModeEnum.EDIT) {
-    //                System.out.printf("Введите новое имя (текущее имя: %s):\t", prevName);
-    //            } else {
-    //            }
-                    return source.get();
+            System.out.print("Введите имя (Name): ");
+            String candidate = source.get();
+            if (candidate.isEmpty()){
+                throw new IllegalArgumentException("Пустое имя.");
             } else {
-                return "Default name";
+                return candidate;
             }
-        } catch (IOException e) {
-            System.err.println("Возникла ошибка при получении имени. Продолжить? [y/n]");
+        } catch (IOException | IllegalArgumentException e) {
+            System.err.println(e.getMessage() + " Ввести заново? [y/n]");
             if (Objects.equals(source.get(), "y")){
                 return collectName();
             } else {
@@ -155,30 +153,141 @@ public class DataCollector {
             }
         }
     }
+
+    private Coordinates collectCoordinates() throws IOException{
+        try {
+            System.out.print("Введите координату X (Long < 927) (100): ");
+            long x = Long.parseLong(source.get());
+            if (x > 927){
+                throw new IllegalArgumentException("Значение координаты X не может превышать 927.");
+            }
+            System.out.print("Введите координату Y (Double < 772) (200): ");
+            double y = Double.parseDouble(source.get());
+            if (y > 772){
+                throw new IllegalArgumentException("Значение координаты Y не может превышать 772.");
+            }
+            return new Coordinates(x, y);
+        } catch (IOException | NumberFormatException e){
+            System.err.println("Некорректный формат данных. Ввести заново? [y/n]");
+            if (Objects.equals(source.get(), "y")){
+                return collectCoordinates();
+            } else {
+                throw new RunOffCommandException("Возникла ошибка при получении координат");
+            }
+        } catch (IllegalArgumentException e){
+            System.err.println(e.getMessage() + " Ввести заново? [y/n]");
+            if (Objects.equals(source.get(), "y")){
+                return collectCoordinates();
+            } else {
+                throw new RunOffCommandException("Возникла ошибка при получении координат");
+            }
+        }
+    }
+
+    private int collectStudentsCount() throws IOException{
+        try {
+            System.out.print("Введите количество студентов (Integer) (20): ");
+            int candidate = Integer.parseInt(source.get());
+            if (candidate > 0){
+                return candidate;
+            } else {
+                throw new IllegalArgumentException("Количество студентов должно быть положительным.");
+            }
+        } catch (IOException | NumberFormatException e){
+            System.err.println("Некорректный формат данных. Ввести заново? [y/n]");
+            if (Objects.equals(source.get(), "y")){
+                return collectStudentsCount();
+            } else {
+                throw new RunOffCommandException("Возникла ошибка при получении количества студентов");
+            }
+        } catch (IllegalArgumentException e){
+            System.err.println(e.getMessage() + " Ввести заново? [y/n]");
+            if (Objects.equals(source.get(), "y")){
+                return collectStudentsCount();
+            } else {
+                throw new RunOffCommandException("Возникла ошибка при получении количества студентов");
+            }
+        }
+    }
+
+    private long collectTransferredStudents() throws IOException{
+        try {
+            System.out.print("Введите количество студентов по обмену (Long) (1): ");
+            long candidate = Long.parseLong(source.get());
+            if (candidate > 0){
+                return candidate;
+            } else {
+                throw new IllegalArgumentException("Количество студентов должно быть положительным.");
+            }
+        } catch (IOException | NumberFormatException e){
+            System.err.println("Некорректный формат данных. Ввести заново? [y/n]");
+            if (Objects.equals(source.get(), "y")){
+                return collectTransferredStudents();
+            } else {
+                throw new RunOffCommandException("Возникла ошибка при получении количества студентов по обмену");
+            }
+        } catch (IllegalArgumentException e){
+            System.err.println(e.getMessage() + " Ввести заново? [y/n]");
+            if (Objects.equals(source.get(), "y")){
+                return collectStudentsCount();
+            } else {
+                throw new RunOffCommandException("Возникла ошибка при получении количества студентов");
+            }
+        }
+    }
+
+    private FormOfEducation collectFormOfEducation() throws IOException{
+        try {
+            String forms = " ";
+            for (FormOfEducation form : FormOfEducation.values()) {
+                forms += form.toString() + " ";
+            }
+            System.out.print("Введите форму обучения из доступных (" + forms + "): ");
+            String formString = source.get().toUpperCase();
+            return FormOfEducation.valueOf(formString);
+        } catch (IOException | IllegalArgumentException e){
+            System.err.println("Некорректный формат данных. Ввести заново? [y/n]");
+            if (Objects.equals(source.get(), "y")){
+                return collectFormOfEducation();
+            } else {
+                throw new RunOffCommandException("Возникла ошибка при получении формы обучения");
+            }
+        }
+    }
+
+    private Semester collectSemesterEnum() throws IOException{
+        try {
+            String semesters = " ";
+            for (Semester semester : Semester.values()) {
+                semesters += semester.toString() + " ";
+            }
+            System.out.print("Введите семестр из доступных (" + semesters + "): ");
+            String semesterString = source.get().toUpperCase();
+            return Semester.valueOf(semesterString);
+        } catch (IOException | IllegalArgumentException e){
+            System.err.println("Некорректный формат данных. Ввести заново? [y/n]");
+            if (Objects.equals(source.get(), "y")){
+                return collectSemesterEnum();
+            } else {
+                throw new RunOffCommandException("Возникла ошибка при получении семестра");
+            }
+        }
+    }
+
     private LocalDate collectBirthday() throws IOException{
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-            System.out.print("Введите день рождения в формате дд.мм.гггг (20.01.2004):\t");
-            if (source.hasNext()){
-                String birthdayString = source.get();
-    //            if (mode == DataInputModeEnum.EDIT){
-    //                System.out.printf("Введите день рождения в формате дд.мм.гггг (текущее значение: %s):\t", prevValue.toString());
-    //            } else {
-    //            }
-                    return LocalDate.parse(birthdayString, formatter);
-            } else {
-//                return LocalDate.parse(String.format("%d.%d.%d", Math.floor(Math.random() * 31), (int) Math.floor(Math.random() * 13), (int) Math.floor(Math.random() * 2000) ), formatter);
-                return LocalDate.parse("20.01.2004", formatter);
-            }
-        } catch (IOException e){
-            System.err.println("Возникла ошибка при получении даты рождения. Проверьте формат ввода данных. Продолжить? [y/n]");
+            System.out.print("Введите дату рождения в формате 'дд.мм.гггг' (20.01.2004): ");
+            String birthdayString = source.get();
+            return LocalDate.parse(birthdayString, formatter);
+        } catch (IOException | DateTimeParseException e){
+            System.err.println("Некорректный формат данных. Ввести заново? [y/n]");
             if (Objects.equals(source.get(), "y")){
                 return collectBirthday();
             } else {
                 throw new RunOffCommandException("Возникла ошибка при получении даты рождения");
             }
         }
-
     }
     private Color collectEyeColor() throws IOException{
         try {
@@ -186,19 +295,11 @@ public class DataCollector {
             for (Color color : Color.values()) {
                 colors += color.toString() + " ";
             }
-    //            if (mode == DataInputModeEnum.EDIT){
-    //                System.out.printf("Введите цвет глаз из доступных (текущее значение: %s): (" + colors + ")\t", prevValue);
-    //            } else {
-            System.out.print("Введите цвет глаз из доступных: (" + colors + ")\t");
-    //            }
-            if (source.hasNext()){
-                String eyeColorString = source.get().toUpperCase();
-                return Color.valueOf(eyeColorString);
-            } else {
-                return Color.values()[(int) Math.floor(Math.random() * Color.values().length)];
-            }
-        } catch (IOException e){
-            System.err.println("Возникла ошибка при получении даты цвета глаз. Продолжить? [y/n]");
+            System.out.print("Введите цвет глаз из доступных (" + colors + "): ");
+            String eyeColorString = source.get().toUpperCase();
+            return Color.valueOf(eyeColorString);
+        } catch (IOException | IllegalArgumentException e){
+            System.err.println("Некорректный формат данных. Ввести заново? [y/n]");
             if (Objects.equals(source.get(), "y")){
                 return collectEyeColor();
             } else {
@@ -213,19 +314,11 @@ public class DataCollector {
             for (Country country : Country.values()) {
                 nationalities += country.toString() + " ";
             }
-            System.out.print("Введите национальность из доступных: (" + nationalities + ")\t");
-        if (source.hasNext()){
+            System.out.print("Введите национальность из доступных (" + nationalities + "): ");
             String nationalityString = source.get().toUpperCase();
-//            if (mode == DataInputModeEnum.EDIT){
-//                System.out.printf("Введите национальность из доступных (текущее значение: %s): (" + nationalities + ")\t", prevValue);
-//            } else {
-//            }
-                return Country.valueOf(nationalityString);
-        } else {
-            return Country.values()[(int) Math.floor(Math.random() * Country.values().length)];
-        }
-        } catch (IOException e){
-            System.err.println("Возникла ошибка при получении национальности. Продолжить? [y/n]");
+            return Country.valueOf(nationalityString);
+        } catch (IOException | IllegalArgumentException e){
+            System.err.println("Некорректный формат данных. Ввести заново? [y/n]");
             if (Objects.equals(source.get(), "y")){
                 return collectNationality();
             } else {
@@ -236,151 +329,21 @@ public class DataCollector {
     }
     private Location collectLocation() throws IOException{
         try {
-            System.out.print("Введите локацию в формате (Double)x (Float)y (Integer)z (String)Название_локации (10.0 10.0 10 Loc1):\t");
-            if (source.hasNext()){
-                String locationData = source.get().replace("\\s*", " ");
-                //            if (mode == DataInputModeEnum.EDIT){
-    //                System.out.printf("Введите локацию (текущее значение: %.5f %.5f %d %s) в формате (Double)x (Float)y (Integer)z название_локации:\t", prevValue.getX(), prevValue.getY(), prevValue.getZ(), prevValue.getName());
-    //            } else {
-    //            }
-                    String[] locationDataArray = locationData.split(" ");
-                    Double x = Double.parseDouble(locationDataArray[0]);
-                    Float y = Float.parseFloat(locationDataArray[1]);
-                    Integer z = Integer.parseInt(locationDataArray[2]);
-                    String locationName = locationDataArray[3];
-                    return new Location(x, y, z, locationName);
-            } else {
-                return  new Location(10.0, (float) 10, 10, "Default location");
-            }
-        } catch (IOException e){
-            System.err.println("Возникла ошибка при получении локации. Проверьте формат ввода данных. Продолжить? [y/n]");
+            System.out.print("Введите координату X (Double) локации (10.0): ");
+            Double x = Double.parseDouble(source.get());
+            System.out.print("Введите координату Y (Float) локации (10.0): ");
+            Float y = Float.parseFloat(source.get());
+            System.out.print("Введите координату X (Integer) локации (10): ");
+            Integer z = Integer.parseInt(source.get());
+            System.out.print("Введите название локации (Saint-Petersburg): ");
+            String locationName = source.get();
+            return new Location(x, y, z, locationName);
+        } catch (IOException | IllegalArgumentException e){
+            System.err.println("Некорректный формат данных. Ввести заново? [y/n]");
             if (Objects.equals(source.get(), "y")){
                 return collectLocation();
             } else {
                 throw new RunOffCommandException("Возникла ошибка при получении локации");
-            }
-        }
-    }
-    private Coordinates collectCoordinates() throws IOException{
-        try {
-            System.out.print("Введите координаты в формате (Long < 927)x (Double < 772)y (0 0):\t");
-            if (source.hasNext()){
-                String coordinatesData = source.get().replace("\\s*", " ");
-                //            if (mode == DataInputModeEnum.EDIT){
-        //                System.out.printf("Введите координаты (текущее значение: %d, %.5f) в формате (Long)x (Double)y:\t", prevCoordinates.getX(), prevCoordinates.getY());
-        //            } else {
-        //            }
-                    String[] coordinatesDataArray = coordinatesData.split(" ");
-                    long x = Long.parseLong(coordinatesDataArray[0]);
-                    double y = Double.parseDouble(coordinatesDataArray[1]);
-                    return new Coordinates(x, y);
-            } else {
-                return  new Coordinates(0,0);
-            }
-        } catch (IOException | NullPointerException | ArrayIndexOutOfBoundsException | NumberFormatException e){
-//            System.err.println("Возникла ошибка при получении координат. Проверьте формат ввода данных. Продолжить? [y/n]");
-//            String response = source.get();
-//            System.out.println(response);
-//            if (Objects.equals(response, "y")){
-//                return collectCoordinates();
-//            } else {
-                throw new RunOffCommandException("Возникла ошибка при получении координат");
-//            }
-        }
-    }
-    private int collectStudentsCount() throws IOException{
-        try {
-            System.out.print("Введите количество студентов (20):\t");
-            if (source.hasNext()){
-                String studentsCountString = source.get();
-                //            if (mode == DataInputModeEnum.EDIT){
-    //                System.out.printf("Введите новое количество студентов (текущее количество: %d):\t", prevCount);
-    //            } else{
-    //            }
-                    return Integer.parseInt(studentsCountString);
-            } else {
-                return 20;
-            }
-        } catch (IOException e){
-            System.err.println("Возникла ошибка при получении количества студентов. Продолжить? [y/n]");
-            if (Objects.equals(source.get(), "y")){
-                return collectStudentsCount();
-            } else {
-                throw new RunOffCommandException("Возникла ошибка при получении количества студентов");
-            }
-        }
-    }
-    private long collectTransferredStudents() throws IOException{
-        try {
-            System.out.print("Введите количество студентов по обмену (1):\t");
-            if (source.hasNext()){
-                String transferredStudentsString = source.get();
-                //            if (mode == DataInputModeEnum.EDIT){
-    //                System.out.printf("Введите новое количество студентов по обмену (текущее количество: %d):\t", prevCount);
-    //            } else {
-    //            }
-                    return Long.parseLong(transferredStudentsString);
-            } else {
-                return 1;
-            }
-        } catch (IOException e){
-            System.err.println("Возникла ошибка при получении количества студентов по обмену. Продолжить? [y/n]");
-            if (Objects.equals(source.get(), "y")){
-                return collectTransferredStudents();
-            } else {
-                throw new RunOffCommandException("Возникла ошибка при получении количества студентов по обмену");
-            }
-        }
-    }
-    private FormOfEducation collectFormOfEducation() throws IOException{
-        try {
-            String forms = " ";
-            for (FormOfEducation form : FormOfEducation.values()) {
-                forms += form.toString() + " ";
-            }
-            //            if (mode == DataInputModeEnum.EDIT){
-            //                System.out.printf("Введите форму обучения из доступных (текущее значение %s): (" + forms + ")\t", prevValue);
-            //            } else {
-            System.out.print("Введите форму обучения из доступных: (" + forms + ")\t");
-            //            }
-            if (source.hasNext()){
-                String formString = source.get().toUpperCase();
-                return FormOfEducation.valueOf(formString);
-            } else {
-                return FormOfEducation.values()[(int) Math.floor(Math.random() * FormOfEducation.values().length)];
-            }
-        } catch (IOException e){
-            System.err.println("Возникла ошибка при получении формы обучения. Продолжить? [y/n]");
-            if (Objects.equals(source.get(), "y")){
-                return collectFormOfEducation();
-            } else {
-                throw new RunOffCommandException("Возникла ошибка при получении формы обучения");
-            }
-        }
-    }
-    private Semester collectSemesterEnum() throws IOException{
-        try {
-            String semesters = " ";
-            for (Semester semester : Semester.values()) {
-                semesters += semester.toString() + " ";
-            }
-//            if (mode == DataInputModeEnum.EDIT){
-//                System.out.printf("Введите семестр из доступных (текущее значение: %s): (" + semesters + ")\t", prevValue);
-//            } else {
-            System.out.print("Введите семестр из доступных: (" + semesters + ")\t");
-//            }
-            if (source.hasNext()){
-                String semesterString = source.get().toUpperCase();
-                return Semester.valueOf(semesterString);
-            } else {
-                return Semester.values()[(int) Math.floor(Math.random() * Semester.values().length)];
-            }
-        } catch (IOException e){
-            System.err.println("Возникла ошибка при получении семестра. Продолжить? [y/n]");
-            if (Objects.equals(source.get(), "y")){
-                return collectSemesterEnum();
-            } else {
-                throw new RunOffCommandException("Возникла ошибка при получении семестра");
             }
         }
     }

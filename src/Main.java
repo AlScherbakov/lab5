@@ -14,7 +14,8 @@ public class Main {
             client.run();
         } catch (Exception e){
             client.stop();
-            System.out.println("Возникла ошибка. Работа программы прекращена");
+//            System.err.println("Возникла ошибка. Работа программы прекращена");
+            System.err.println(e.getMessage());
         }
     }
 }

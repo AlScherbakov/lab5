@@ -77,7 +77,9 @@ public class Receiver {
     }
 
     public void removeFirstReader(){
-        readers.remove();
+        if (readers.size() > 0){
+            readers.remove();
+        }
     }
 
     public void addToCollection(StudyGroup e){

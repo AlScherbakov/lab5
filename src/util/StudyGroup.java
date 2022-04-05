@@ -45,7 +45,7 @@ public class StudyGroup implements Comparable<StudyGroup> {
     }
 
     public boolean isValid () {
-        return id != null && id > 0 && name != null && name.length() > 0 && coordinates != null && creationDate != null && studentsCount > 0 && transferredStudents > 0 && formOfEducation != null && semesterEnum != null && groupAdmin != null;
+        return id != null && id > 0 && name != null && name.length() > 0 && coordinates != null && coordinates.getX() <= 927 && coordinates.getY() <= 772 && creationDate != null && studentsCount > 0 && transferredStudents > 0 && formOfEducation != null && semesterEnum != null && groupAdmin != null;
     }
 
     public void setName(String name) throws IllegalArgumentException{
